@@ -20,3 +20,7 @@ view(dados)
 dados_fem <- dados %>%
   filter(sexo == "F", ano == 1996)
 view(dados_fem)  
+
+dados_mas <- dados %>%
+  filter(sexo == "M", ano == 1996)
+view(dados_mas)
