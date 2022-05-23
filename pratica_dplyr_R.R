@@ -52,7 +52,7 @@ dados_sum_f
 # Nomes masculinos
 
 dados_sum_m <- dados %>%
-  filter(nome %in% c("Bob", "Calib", "Dalan", "Chistopher",
+  filter(nome %in% c("Oswaldo", "Calib", "Dalan", "Chistopher",
                      "Kamel", "Martinez", "Vinicius", "Ellison")) %>%
   group_by(nome) %>%
   summarise(mean(prop), sd(prop))
@@ -74,7 +74,7 @@ dados_sum_f
 # Nomes masculinos
 
 dados_sum_m <- dados %>%
-  filter(nome %in% c("Bob", "Calib", "Dalan", "Chistopher",
+  filter(nome %in% c("Oswaldo", "Calib", "Dalan", "Chistopher",
                      "Kamel", "Martinez", "Vinicius", "Ellison")) %>%
   group_by(nome) %>%
   summarise(media_prop_m = mean(prop), desvio_m = sd(prop),
@@ -92,3 +92,12 @@ gf <- ggplot(dados_sum_f) +
                     ymax = media_prop_f + se),
                     width = 0.2)
 gf 
+
+gm <- ggplot(dados_sum_m) +
+  geom_col(aes(x = fct_reorder(nome, media_prop_m), 
+               y = media_prop_m), fill = "#fc8d62") +
+  geom_errorbar(aes(x = nome, y = media_prop_m, 
+                    ymin = media_prop_m - se,
+                    ymax = media_prop_m + se),
+                    width = 0.2)
+gm 
