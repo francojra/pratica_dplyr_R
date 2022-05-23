@@ -25,12 +25,20 @@ dados_mas <- dados %>%
   filter(sexo == "M", ano == 1996, n <= 20)
 view(dados_mas)
 
-### função select
+### Função select
 
-dados_fem %>%
-  select(nome, starts_with("An"))
+dados_fem <- dados_fem %>%
+  select(nome, n, prop)
+view(dados_fem)
 
-dados_mas %>%
-  select(nome, starts_with("Ja"))
+dados_mas <- dados_mas %>%
+  select(nome, n, prop)
+view(dados_mas)
 
 ### função summarise
+
+dados_sum <- dados %>%
+  filter(nome %in% c("Anna", "Bibi", "Cydnie")) %>%
+  group_by(nome) %>%
+  summarise(mean(prop))
+dados_sum
