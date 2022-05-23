@@ -5,9 +5,10 @@
 
 # Baixar pacote ----------------------------------------------------------------------------------------------------------------------------
 
-library(tidyverse)
-library(dados)
-library(forcats)
+library(tidyverse) # pacotes ggplot2 para gráficos e dplyr para análises e organização de tabela
+library(dados) # Pacote para baixar dados traduzidos
+library(forcats) # Pacote para ordenar fatores no gráfico
+library(patchwork) # Pacote para juntar gráficos em janela única
 
 # Baixar dados -----------------------------------------------------------------------------------------------------------------------------
 
@@ -106,3 +107,5 @@ gm <- ggplot(dados_sum_m) +
   labs(x = "Nomes masculinos", y = "Proporção") +
   theme_dark()
 gm 
+
+gf + gm
