@@ -17,6 +17,6 @@ view(dados)
 
 ### função filter
 
-dados %>%
-  filter(sexo == "F")
-  
+dados_fem <- dados %>%
+  filter(sexo == "F", ano == 1996)
+view(dados_fem)  
