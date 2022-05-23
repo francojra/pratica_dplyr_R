@@ -7,11 +7,14 @@
 
 library(tidyverse)
 library(dados)
+library(forcats)
 
 # Baixar dados -----------------------------------------------------------------------------------------------------------------------------
 
 dados <- dados::bebes
 view(dados)
+glimpse(dados)
+dados$nome <- as.factor(dados$nome)
 
 # Análises ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +46,7 @@ dados_sum_f <- dados %>%
   filter(nome %in% c("Anna", "Bibi", "Cydnie", "Estella", 
                      "Anne", "Maria", "Jeanne", "Cora")) %>%
   group_by(nome) %>%
-  summarise(mean(prop))
+  summarise(mean(prop), sd(prop))
 dados_sum_f
 
 # Nomes masculinos
@@ -52,7 +55,7 @@ dados_sum_m <- dados %>%
   filter(nome %in% c("Bob", "Calib", "Dalan", "Chistopher",
                      "Kamel", "Martinez", "Vinicius", "Ellison")) %>%
   group_by(nome) %>%
-  summarise(mean(prop))
+  summarise(mean(prop), sd(prop))
 dados_sum_m
 
 ### função arrange
@@ -63,7 +66,8 @@ dados_sum_f <- dados %>%
   filter(nome %in% c("Anna", "Bibi", "Cydnie", "Estella", 
                      "Anne", "Maria", "Jeanne", "Cora")) %>%
   group_by(nome) %>%
-  summarise(media_prop_f = mean(prop)) %>%
+  summarise(media_prop_f = mean(prop), desvio_f = sd(prop), 
+            n = n(), se = desvio_f / sqrt(n)) %>%
   arrange(media_prop_f)
 dados_sum_f
 
@@ -73,6 +77,16 @@ dados_sum_m <- dados %>%
   filter(nome %in% c("Bob", "Calib", "Dalan", "Chistopher",
                      "Kamel", "Martinez", "Vinicius", "Ellison")) %>%
   group_by(nome) %>%
-  summarise(media_prop_m = mean(prop)) %>%
+  summarise(media_prop_m = mean(prop), desvio_m = sd(prop),
+            n = n(), se = desvio_m / sqrt(n)) %>%
   arrange(media_prop_m)
 dados_sum_m
+
+# Gráficos ---------------------------------------------------------------------------------------------------------------------------------
+
+gf <- ggplot(dados_sum_f) +
+  geom_col(aes(x = nome, y = media_prop_f), fill = "#66c2a5") +
+  geom_errorbar(aes(x = nome, y = media_prop_f, 
+                    ymin = media_prop_f - desvio_f,
+                    ymax = media_prop_f + desvio_f))
+gf
