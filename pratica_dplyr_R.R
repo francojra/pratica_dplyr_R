@@ -85,6 +85,8 @@ dados_sum_m
 
 # Gráficos ---------------------------------------------------------------------------------------------------------------------------------
 
+# Nomes femininos
+
 gf <- ggplot(dados_sum_f) +
   geom_col(aes(x = fct_reorder(nome, media_prop_f), 
                y = media_prop_f), fill = "#66c2a5") +
@@ -95,6 +97,8 @@ gf <- ggplot(dados_sum_f) +
   labs(x = "Nomes femininos", y = "Proporção") +
   theme_dark()
 gf 
+
+# Nomes masculinos
 
 gm <- ggplot(dados_sum_m) +
   geom_col(aes(x = fct_reorder(nome, media_prop_m), 
