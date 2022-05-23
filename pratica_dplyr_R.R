@@ -24,3 +24,13 @@ view(dados_fem)
 dados_mas <- dados %>%
   filter(sexo == "M", ano == 1996, n <= 20)
 view(dados_mas)
+
+### função select
+
+dados_fem %>%
+  select(nome, starts_with("An"))
+
+dados_mas %>%
+  select(nome, starts_with("Ja"))
+
+### função summarise
