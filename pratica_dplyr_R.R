@@ -43,7 +43,7 @@ view(dados_mas)
 # Nomes femininos
 
 dados_sum_f <- dados %>%
-  filter(nome %in% c("Anna", "Bibi", "Cydnie", "Estella", 
+  filter(nome %in% c("Anna", "Bertha", "Julia", "Estella", 
                      "Anne", "Maria", "Jeanne", "Cora")) %>%
   group_by(nome) %>%
   summarise(mean(prop), sd(prop))
@@ -63,7 +63,7 @@ dados_sum_m
 # Nomes femininos
 
 dados_sum_f <- dados %>%
-  filter(nome %in% c("Anna", "Bibi", "Cydnie", "Estella", 
+  filter(nome %in% c("Anna", "Bertha", "Julia", "Estella", 
                      "Anne", "Maria", "Jeanne", "Cora")) %>%
   group_by(nome) %>%
   summarise(media_prop_f = mean(prop), desvio_f = sd(prop), 
@@ -90,7 +90,9 @@ gf <- ggplot(dados_sum_f) +
   geom_errorbar(aes(x = nome, y = media_prop_f, 
                     ymin = media_prop_f - se,
                     ymax = media_prop_f + se),
-                    width = 0.2)
+                    width = 0.2) +
+  labs(x = "Nomes femininos", y = "Proporção") +
+  theme_dark()
 gf 
 
 gm <- ggplot(dados_sum_m) +
@@ -99,5 +101,8 @@ gm <- ggplot(dados_sum_m) +
   geom_errorbar(aes(x = nome, y = media_prop_m, 
                     ymin = media_prop_m - se,
                     ymax = media_prop_m + se),
-                    width = 0.2)
+                    width = 0.2) +
+  scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
+  labs(x = "Nomes masculinos", y = "Proporção") +
+  theme_dark()
 gm 
