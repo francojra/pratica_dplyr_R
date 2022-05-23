@@ -55,4 +55,24 @@ dados_sum_m <- dados %>%
   summarise(mean(prop))
 dados_sum_m
 
+### função arrange
 
+# Nomes femininos
+
+dados_sum_f <- dados %>%
+  filter(nome %in% c("Anna", "Bibi", "Cydnie", "Estella", 
+                     "Anne", "Maria", "Jeanne", "Cora")) %>%
+  group_by(nome) %>%
+  summarise(media_prop_f = mean(prop)) %>%
+  arrange(media_prop_f)
+dados_sum_f
+
+# Nomes masculinos
+
+dados_sum_m <- dados %>%
+  filter(nome %in% c("Bob", "Calib", "Dalan", "Chistopher",
+                     "Kamel", "Martinez", "Vinicius", "Ellison")) %>%
+  group_by(nome) %>%
+  summarise(media_prop_m = mean(prop)) %>%
+  arrange(media_prop_m)
+dados_sum_m
