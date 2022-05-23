@@ -85,8 +85,10 @@ dados_sum_m
 # Gráficos ---------------------------------------------------------------------------------------------------------------------------------
 
 gf <- ggplot(dados_sum_f) +
-  geom_col(aes(x = nome, y = media_prop_f), fill = "#66c2a5") +
+  geom_col(aes(x = fct_reorder(nome, media_prop_f), 
+               y = media_prop_f), fill = "#66c2a5") +
   geom_errorbar(aes(x = nome, y = media_prop_f, 
-                    ymin = media_prop_f - desvio_f,
-                    ymax = media_prop_f + desvio_f))
-gf
+                    ymin = media_prop_f - se,
+                    ymax = media_prop_f + se),
+                    width = 0.2)
+gf 
