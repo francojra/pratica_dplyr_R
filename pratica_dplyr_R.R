@@ -37,8 +37,22 @@ view(dados_mas)
 
 ### função summarise
 
-dados_sum <- dados %>%
-  filter(nome %in% c("Anna", "Bibi", "Cydnie")) %>%
+# Nomes femininos
+
+dados_sum_f <- dados %>%
+  filter(nome %in% c("Anna", "Bibi", "Cydnie", "Estella", 
+                     "Anne", "Maria", "Jeanne", "Cora")) %>%
   group_by(nome) %>%
   summarise(mean(prop))
-dados_sum
+dados_sum_f
+
+# Nomes masculinos
+
+dados_sum_m <- dados %>%
+  filter(nome %in% c("Bob", "Calib", "Dalan", "Chistopher",
+                     "Kamel", "Martinez", "Vinicius", "Ellison")) %>%
+  group_by(nome) %>%
+  summarise(mean(prop))
+dados_sum_m
+
+
